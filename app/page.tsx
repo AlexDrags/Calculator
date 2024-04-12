@@ -27,7 +27,7 @@ export default function Home() {
               type="button" 
               onClick={
                 () => {
-                    if (initValue[initValue.length - 1] == '0') {
+                    if (initValue.length == 1 && initValue[initValue.length - 1] == '0') {
                         return;
                     }
                     setIntiValue(prev => [...prev,String(num)]);
