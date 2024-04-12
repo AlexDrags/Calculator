@@ -28,13 +28,12 @@ export default function Home() {
               onClick={
                 () => {
                     if (initValue.length == 1 && initValue[initValue.length - 1] == '0') {
-                        return;
-                    }
+                      setIntiValue(prev => [...prev,String(num)]);
+                    } else {
                     setIntiValue(prev => [...prev,String(num)]);
 
                     if (num == '.') {
-                       
-                      switch (initValue[initValue.length - 1]) {
+                       switch (initValue[initValue.length - 1]) {
                         case '.':
                           setIntiValue(prev => [...prev.slice(0, prev.length - 1)]);
                           return;
@@ -57,8 +56,14 @@ export default function Home() {
                       if (initValue.length === 0) {
                         setIntiValue(prev => [...['0','.']]);
                       }
-                    }
+
+                      if (initValue.length === 1) {
+                        setIntiValue(prev => [...prev,'.']);
+                      }
+
+                    }}
                     if (num == 'C') {
+                      setIntiValue([])
                       clearValue(setIntiValue);
                     }
                 }
@@ -102,7 +107,7 @@ export default function Home() {
                     if (operation == '=') {
                       let finishValue = eval(initValue.join(''));
 
-                      if(finishValue == 'Infinity') {
+                      if(finishValue == 'Infinity' || finishValue == '-Infinity') {
                         setTotal('0');
                         setIntiValue(prev => ['0']);
                       } else {
