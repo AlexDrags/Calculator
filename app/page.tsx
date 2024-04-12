@@ -27,17 +27,26 @@ export default function Home() {
               type="button" 
               onClick={
                 () => {
-                    if (initValue.length == 1 && initValue[initValue.length - 1] == '0') {
-                      setIntiValue(prev => [...prev,String(num)]);
-                    } else {
                     setIntiValue(prev => [...prev,String(num)]);
 
                     if (num == '.') {
-                       switch (initValue[initValue.length - 1]) {
+                      
+                      if (initValue.length == 1 && initValue[initValue.length - 1] == '0') {
+                        console.log('xyi');
+                        setIntiValue(prev => [...prev.slice(0, prev.length - 1),String(num)]);
+                      }
+
+                      // if (initValue[initValue.length - 1] == '.') {
+                      //   return;
+                      // }
+
+                      switch (initValue[initValue.length - 1]) {
                         case '.':
+                          console.log('xyi');
                           setIntiValue(prev => [...prev.slice(0, prev.length - 1)]);
-                          return;
+                          break;
                         case '+':
+                          console.log('xyi');
                           setIntiValue(prev => [...prev.slice(0, prev.length - 1),...['0','.']]);
                           break;
                         case '-':
@@ -57,11 +66,12 @@ export default function Home() {
                         setIntiValue(prev => [...['0','.']]);
                       }
 
-                      if (initValue.length === 1) {
-                        setIntiValue(prev => [...prev,'.']);
-                      }
+                      // if (initValue.length === 1) {
+                      //   setIntiValue(prev => [...prev,'.']);
+                      // }
 
-                    }}
+                    }
+
                     if (num == 'C') {
                       setIntiValue([])
                       clearValue(setIntiValue);
