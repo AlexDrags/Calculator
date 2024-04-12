@@ -27,8 +27,11 @@ export default function Home() {
               type="button" 
               onClick={
                 () => {
+                    if (initValue[initValue.length - 1] == '0') {
+                        return;
+                    }
                     setIntiValue(prev => [...prev,String(num)]);
-                    
+
                     if (num == '.') {
                        
                       switch (initValue[initValue.length - 1]) {
@@ -97,7 +100,17 @@ export default function Home() {
                     }
                     
                     if (operation == '=') {
+                      let finishValue = eval(initValue.join(''));
+
+                      if(finishValue == 'Infinity') {
+                        setTotal('0');
+                        setIntiValue(prev => ['0']);
+                      } else {
                       totalValue(setTotal, initValue, clearValue, setIntiValue);
+                      setIntiValue(prev => [`${finishValue}`]);
+                      }
+
+                      ;
                     }
                   }
                 } 
